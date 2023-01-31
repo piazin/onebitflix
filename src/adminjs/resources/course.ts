@@ -1,4 +1,6 @@
-import { ResourceOptions } from 'adminjs';
+import uploadFileFeature from '@adminjs/upload';
+import { FeatureType, ResourceOptions } from 'adminjs';
+import path from 'path';
 
 export const courseResourceOptions: ResourceOptions = {
   navigation: 'Catálogo',
@@ -28,3 +30,21 @@ export const courseResourceOptions: ResourceOptions = {
     'updatedAt',
   ],
 };
+
+export const courseResourceFeatures: FeatureType[] = [
+  uploadFileFeature({
+    provider: {
+      local: {
+        bucket: path.join(__dirname, '..', '..', '..', 'uploads')
+      }
+    },
+    properties: {
+      key: 'thumbnailUrl',
+      file:'uploadThumbnail',
+    },
+    uploadPath: (record, filename) => `thumbnails/course-${record.id()}/${filename}`,
+    validation: {
+      mimeTypes: ['image/png', 'image/jpg', 'image/jpeg']
+    }
+  })
+]
