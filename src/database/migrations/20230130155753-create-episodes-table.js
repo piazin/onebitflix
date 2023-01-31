@@ -17,15 +17,35 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.TEXT,
       },
+      order: {
+        allowNull: false,
+        type: Sequelize.DataTypes.INTEGER,
+      },
+      video_url: {
+        type: Sequelize.DataTypes.STRING,
+      },
+      seconds_long: {
+        type: Sequelize.DataTypes.INTEGER,
+      },
+      course_id: {
+        allowNull: false,
+        type: Sequelize.DataTypes.INTEGER,
+        references: { model: 'courses', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('episodes');
   },
 };
