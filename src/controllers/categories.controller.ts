@@ -1,36 +1,17 @@
 import { Request, Response } from 'express';
-import { Category } from '../models';
+import { categoryService } from '../services/categories.service';
 
 export const categoriesController = {
   index: async (req: Request, res: Response) => {
     const { page, limit } = req.query;
 
-    const pageNumber =
-      typeof page === 'string' && parseInt(page, 10) ? parseInt(page, 10) : 1;
-
-    const limitNumber =
-      typeof limit === 'string' && parseInt(limit, 10)
-        ? parseInt(limit, 10)
-        : 10;
-
-    const offset = (pageNumber - 1) * limitNumber;
-
     try {
-      const { count, rows } = await Category.findAndCountAll({
-        attributes: ['id', 'name', 'position'],
-        order: [['position', 'ASC']],
-        limit: limitNumber,
-        offset,
-      });
+      const data = await categoryService.findAllPaginated(
+        page as string,
+        limit as string
+      );
 
-      return res.status(200).json({
-        data: {
-          categories: rows,
-          page: pageNumber,
-          limit,
-          total: count,
-        },
-      });
+      return res.status(200).json(data);
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
@@ -42,8 +23,7 @@ export const categoriesController = {
     const { id } = req.params;
 
     try {
-      const category = await Category.findByPk(id);
-
+      const category = await categoryService.findById(id);
       return res.status(200).json(category);
     } catch (error) {
       if (error instanceof Error) {
