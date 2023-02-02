@@ -19,7 +19,7 @@ export const categoriesController = {
     }
   },
 
-  byId: async (req: Request, res: Response) => {
+  show: async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {

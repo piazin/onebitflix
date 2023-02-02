@@ -1,13 +1,14 @@
 import express from 'express';
 import { adminJs, adminJsRouter } from './adminjs';
 import { sequelize } from './database';
-import { categoriesRouter } from './routes';
+import { categoriesRouter, coursesRouter } from './routes';
 
 const app = express();
 
 app.use(express.static('public'));
 app.use(adminJs.options.rootPath, adminJsRouter);
 app.use(categoriesRouter);
+app.use(coursesRouter);
 
 (async () => {
   try {
