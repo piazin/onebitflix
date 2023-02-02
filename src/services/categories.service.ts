@@ -1,5 +1,5 @@
 import { getPaginationParams } from '../helpers/getPaginationParams';
-import { Category } from '../models';
+import { Category, Course } from '../models';
 
 class CategoryService {
   async findAllPaginated(page: string, limit: string) {
@@ -21,9 +21,13 @@ class CategoryService {
     };
   }
 
-  async findById(id: string) {
+  async findByIdWithCourses(id: string) {
     const category = Category.findByPk(id, {
       attributes: ['id', 'name', 'position'],
+      include: {
+        association: 'courses',
+        attributes: ['id', 'name', 'synopsis', 'thumbnailUrl'],
+      },
     });
 
     return category;

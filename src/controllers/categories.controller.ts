@@ -23,7 +23,7 @@ export const categoriesController = {
     const { id } = req.params;
 
     try {
-      const category = await categoryService.findById(id);
+      const category = await categoryService.findByIdWithCourses(id);
       return res.status(200).json(category);
     } catch (error) {
       if (error instanceof Error) {
