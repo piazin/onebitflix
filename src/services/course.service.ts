@@ -1,3 +1,5 @@
+import { Op } from 'sequelize';
+import { getPaginationParams } from '../helpers/getPaginationParams';
 import { Course } from '../models';
 
 class CourseService {
@@ -34,6 +36,38 @@ class CourseService {
     );
 
     return randomFeaturedCourses.slice(0, 3);
+  }
+
+  async getTopTenNewest() {
+    const newestCourses = Course.findAll({
+      limit: 10,
+      order: [['created_at', 'DESC']],
+    });
+
+    return newestCourses;
+  }
+
+  async findByName(name: string, page: string, limit: string) {
+    const [pageNumber, limitNumber] = getPaginationParams({ page, limit });
+    const offset = (pageNumber - 1) * limitNumber;
+
+    const { count, rows } = await Course.findAndCountAll({
+      attributes: ['id', 'name', 'synopsis', 'thumbnailUrl'],
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+      limit: limitNumber,
+      offset,
+    });
+
+    return {
+      courses: rows,
+      page: pageNumber,
+      limitNumber,
+      total: count,
+    };
   }
 }
 

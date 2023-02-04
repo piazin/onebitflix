@@ -25,4 +25,32 @@ export const coursesController = {
       }
     }
   },
+
+  newest: async (req: Request, res: Response) => {
+    try {
+      const newestCourses = await courseService.getTopTenNewest();
+      return res.status(200).json(newestCourses);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
+
+  search: async (req: Request, res: Response) => {
+    const { name, page, limit } = req.query;
+
+    try {
+      const courses = await courseService.findByName(
+        name as string,
+        page as string,
+        limit as string
+      );
+      return res.status(200).json(courses);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
 };
