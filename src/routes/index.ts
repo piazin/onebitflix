@@ -1,4 +1,6 @@
 import { router as categoriesRouter } from './categories.routes';
+import { router as episodesRouter } from './episodes.routes';
 import { router as coursesRouter } from './courses.routes';
+import { router as authUser } from './auth.routes';
 
-export { categoriesRouter, coursesRouter };
+export { categoriesRouter, coursesRouter, episodesRouter, authUser };
