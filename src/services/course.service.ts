@@ -21,6 +21,20 @@ class CourseService {
 
     return courseWithEpisodes;
   }
+
+  async getRandomFeaturedCourses() {
+    const featuredCourses = await Course.findAll({
+      attributes: ['id', 'name', 'synopsis', 'thumbnailUrl'],
+      where: { featured: true },
+      limit: 3,
+    });
+
+    const randomFeaturedCourses = featuredCourses.sort(
+      () => 0.5 - Math.random()
+    );
+
+    return randomFeaturedCourses.slice(0, 3);
+  }
 }
 
 export const courseService = new CourseService();
