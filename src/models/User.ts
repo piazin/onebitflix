@@ -13,8 +13,12 @@ interface User {
   role: 'admin' | 'user';
 }
 
+type checkPasswordCallback = (err?: Error, isSame?: boolean) => void;
+
 export interface UserCreationAttributes extends Optional<User, 'id'> {}
-interface UserInstance extends Model<User, UserCreationAttributes>, User {}
+interface UserInstance extends Model<User, UserCreationAttributes>, User {
+  checkPassword: (password: string, cb: checkPasswordCallback) => void;
+}
 
 export const User = sequelize.define<UserInstance, User>(
   'users',
@@ -71,3 +75,13 @@ export const User = sequelize.define<UserInstance, User>(
     },
   }
 );
+
+User.prototype.checkPassword = function (
+  password: string,
+  cb: checkPasswordCallback
+) {
+  bcrypt.compare(password, this.password, (err, isSame) => {
+    if (err) cb(err);
+    cb(err, isSame);
+  });
+};
