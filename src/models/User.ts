@@ -16,7 +16,9 @@ interface User {
 type checkPasswordCallback = (err?: Error, isSame?: boolean) => void;
 
 export interface UserCreationAttributes extends Optional<User, 'id'> {}
-interface UserInstance extends Model<User, UserCreationAttributes>, User {
+export interface UserInstance
+  extends Model<User, UserCreationAttributes>,
+    User {
   checkPassword: (password: string, cb: checkPasswordCallback) => void;
 }
 

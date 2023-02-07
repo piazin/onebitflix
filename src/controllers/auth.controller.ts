@@ -26,9 +26,15 @@ export const authController = {
 
         const token = jwtService.signToken(payload, '7d');
 
-        return res.status(200).json({ authenticated: true, user, token });
+        return res.status(200).json({ authenticated: true, ...payload, token });
       });
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({
+          message: error.message,
+        });
+      }
+    }
   },
 
   register: async (req: Request, res: Response) => {
