@@ -5,7 +5,6 @@ export const episodesController = {
   stream: async (req: Request, res: Response) => {
     const { videoUrl } = req.query;
     const range = req.headers.range;
-    console.log('🚀 ~ file: episodes.controller.ts:8 ~ stream: ~ range', range);
 
     try {
       if (typeof videoUrl !== 'string')

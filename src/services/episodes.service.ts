@@ -13,23 +13,11 @@ class EpisodeService {
 
     if (range) {
       var parts = range.replace(/bytes=/, '').split('-');
-      console.log(
-        '🚀 ~ file: episodes.service.ts:16 ~ EpisodeService ~ parts',
-        parts
-      );
 
       const start = parseInt(parts[0], 10);
       const end = parts[1] ? parseInt(parts[1], 10) : fileStat.size - 1;
-      console.log(
-        '🚀 ~ file: episodes.service.ts:23 ~ EpisodeService ~ end',
-        end
-      );
 
       const chunkSize = end - start + 1;
-      console.log(
-        '🚀 ~ file: episodes.service.ts:29 ~ EpisodeService ~ chunkSize',
-        chunkSize
-      );
 
       const file = fs.createReadStream(filePath, { start, end });
 
