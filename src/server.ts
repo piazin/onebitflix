@@ -6,6 +6,7 @@ import {
   coursesRouter,
   episodesRouter,
   authUser,
+  favoritesRouter,
 } from './routes';
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(adminJs.options.rootPath, adminJsRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(categoriesRouter);
+app.use(favoritesRouter);
 app.use(episodesRouter);
 app.use(coursesRouter);
 app.use(authUser);
