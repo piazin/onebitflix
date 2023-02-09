@@ -31,6 +31,17 @@ class FavoriteService {
       },
     });
   }
+
+  async isFavorited(userId: number, courseId: number) {
+    const favorite = await Favorite.findOne({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+
+    return favorite ? true : false;
+  }
 }
 
 export const favoriteService = new FavoriteService();

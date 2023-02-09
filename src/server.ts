@@ -7,6 +7,7 @@ import {
   episodesRouter,
   authUser,
   favoritesRouter,
+  likeRouter,
 } from './routes';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(categoriesRouter);
 app.use(favoritesRouter);
 app.use(episodesRouter);
 app.use(coursesRouter);
+app.use(likeRouter);
 app.use(authUser);
 
 (async () => {
