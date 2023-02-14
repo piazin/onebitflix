@@ -41,6 +41,20 @@ class UserService {
     return await User.create(attributes);
   }
 
+  async update(
+    id: number,
+    attributes: Omit<UserCreationAttributes, 'password' | 'id' | 'role'>
+  ) {
+    const [affectedRows, updatedUsers] = await User.update(attributes, {
+      where: {
+        id,
+      },
+      returning: true,
+    });
+
+    return updatedUsers[0];
+  }
+
   async getKeepWatchingList(id: number) {
     const userWithWatchingEpisodes = await User.findByPk(id, {
       include: {

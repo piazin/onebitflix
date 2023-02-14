@@ -25,4 +25,25 @@ export const userController = {
       }
     }
   },
+
+  update: async (req: Request, res: Response) => {
+    const { id } = req.user!;
+    const { firstName, lastName, email, birth, phone } = req.body;
+
+    try {
+      const updatedUser = await userService.update(id, {
+        firstName,
+        lastName,
+        email,
+        birth,
+        phone,
+      });
+
+      return res.status(200).json(updatedUser);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
 };
