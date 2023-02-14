@@ -55,6 +55,21 @@ class UserService {
     return updatedUsers[0];
   }
 
+  async updatePassword(id: number, password: string) {
+    const [affectedRows, updatedUsers] = await User.update(
+      { password },
+      {
+        where: {
+          id,
+        },
+        returning: true,
+        individualHooks: true,
+      }
+    );
+
+    return updatedUsers[0];
+  }
+
   async getKeepWatchingList(id: number) {
     const userWithWatchingEpisodes = await User.findByPk(id, {
       include: {

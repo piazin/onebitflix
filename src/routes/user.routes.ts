@@ -9,4 +9,8 @@ router
   .get(ensureAuth, userController.show)
   .put(ensureAuth, userController.update);
 
+router
+  .route('/users/current/password')
+  .put(ensureAuth, userController.updatePassword);
+
 export { router };
