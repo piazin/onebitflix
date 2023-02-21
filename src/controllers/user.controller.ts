@@ -60,7 +60,7 @@ export const userController = {
         if (!isSame)
           return res.status(401).json({ message: 'Senha incorreta!' });
 
-        await userService.updatePassword(user.id, currentPassword);
+        await userService.updatePassword(user.id, newPassword);
         return res.status(204).send();
       } catch (error) {
         if (error instanceof Error) {

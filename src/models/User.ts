@@ -69,9 +69,14 @@ export const User = sequelize.define<UserInstance, User>(
   },
   {
     hooks: {
-      beforeCreate: async (user) => {
+      beforeCreate: (user) => {
         if (user.isNewRecord || user.changed('password')) {
-          user.password = await bcrypt.hash(user.password.toString(), 10);
+          user.password = bcrypt.hashSync(user.password.toString(), 10);
+        }
+      },
+      beforeUpdate: (user) => {
+        if (user.changed('password')) {
+          user.password = bcrypt.hashSync(user.password.toString(), 10);
         }
       },
     },
