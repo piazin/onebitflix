@@ -10,6 +10,7 @@ import {
 } from '.';
 
 export const useRoutes = (app: Express) => {
+  app.get('/', (req, res) => res.status(200).json({}));
   app.use(
     categoriesRouter,
     coursesRouter,
