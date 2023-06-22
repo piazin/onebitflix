@@ -16,4 +16,16 @@ module.exports = {
           }
         : undefined,
   },
+  production: {
+    dialect: 'postgres',
+    host: config.database.host,
+    port: String(config.database.port),
+    database: config.database.db_name,
+    username: config.database.username,
+    password: config.database.password,
+    dialectOptions: {
+      ssl: true,
+      native: true,
+    },
+  },
 };
