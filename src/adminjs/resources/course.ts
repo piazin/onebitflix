@@ -1,23 +1,13 @@
 import uploadFileFeature from '@adminjs/upload';
 import { FeatureType, ResourceOptions } from 'adminjs';
 import path from 'path';
+import UploadProvider from '../provider/uploadProvider';
+const UPLOADS_DIR = path.join(__dirname, '..', '..', '..', 'public');
 
 export const courseResourceOptions: ResourceOptions = {
   navigation: 'Catálogo',
-  editProperties: [
-    'name',
-    'synopsis',
-    'uploadThumbnail',
-    'featured',
-    'categoryId',
-  ],
-  filterProperties: [
-    'name',
-    'featured',
-    'categoryId',
-    'createdAt',
-    'updatedAt',
-  ],
+  editProperties: ['name', 'synopsis', 'uploadThumbnail', 'featured', 'categoryId'],
+  filterProperties: ['name', 'featured', 'categoryId', 'createdAt', 'updatedAt'],
   listProperties: ['id', 'name', 'featured', 'categoryId'],
   showProperties: [
     'id',
@@ -33,18 +23,14 @@ export const courseResourceOptions: ResourceOptions = {
 
 export const courseResourceFeatures: FeatureType[] = [
   uploadFileFeature({
-    provider: {
-      local: {
-        bucket: path.join(__dirname, '..', '..', '..', 'public')
-      }
-    },
+    provider: new UploadProvider(UPLOADS_DIR),
     properties: {
       key: 'thumbnailUrl',
-      file:'uploadThumbnail',
+      file: 'uploadThumbnail',
     },
     uploadPath: (record, filename) => `thumbnails/course-${record.id()}/${filename}`,
     validation: {
-      mimeTypes: ['image/png', 'image/jpg', 'image/jpeg']
-    }
-  })
-]
+      mimeTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+    },
+  }),
+];
