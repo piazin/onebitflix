@@ -23,9 +23,5 @@ module.exports = {
     database: config.database.db_name,
     username: config.database.username,
     password: config.database.password,
-    dialectOptions: {
-      ssl: true,
-      native: true,
-    },
   },
 };
