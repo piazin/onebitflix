@@ -11,7 +11,7 @@ export const sequelize = new Sequelize({
   username: database.username,
   password: database.password,
   dialectOptions:
-    node_env === 'production'
+    node_env === 'test'
       ? {
           ssl: true,
           native: true,
