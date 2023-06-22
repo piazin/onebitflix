@@ -1,22 +1,17 @@
-
 # OneBitFlix API
 
-API contruida para alimentar a aplicação [OneBitFlix.](https://github.com/piazin/onebitflix_web) 
-
-
-
+API contruida para alimentar a aplicação [OneBitFlix.](https://github.com/piazin/onebitflix_web)
 
 ## Tecnologias utilizadas
 
-* NodeJS
-* Express 
-* Sequelize 
-* PostgreSQL 
-* Bcrypt 
-* JWT 
-* AdminJS 
-* TypeScript
-
+- NodeJS
+- Express
+- Sequelize
+- PostgreSQL
+- Bcrypt
+- JWT
+- AdminJS
+- TypeScript
 
 ---
 
@@ -34,4 +29,3 @@ API contruida para alimentar a aplicação [OneBitFlix.](https://github.com/piaz
     </td>
   </tr>
 </table>
-
