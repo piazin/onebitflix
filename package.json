@@ -7,8 +7,10 @@
     "dev": "tsx watch src/server.ts",
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "migrate": "npx sequelize db:migrate:undo && npx sequelize db:migrate",
-    "seed": "npx sequelize db:seed:undo:all && npx sequelize db:seed:all"
+    "migrate": "npx sequelize db:migrate",
+    "migrate:undo": "npx sequelize db:migrate:undo",
+    "seed": "npx sequelize db:seed:all",
+    "seed:undo": "npx sequelize db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
