@@ -9,6 +9,5 @@
     "jsx": "react",
     "rootDir": "src",
     "outDir": "dist"
-  },
-  "include": ["src/**/*.ts"]
+  }
 }
