@@ -1,10 +1,19 @@
+const { config } = require('../dist/config');
+
 module.exports = {
   development: {
     dialect: 'postgres',
-    host: 'localhost',
-    port: '5432',
-    database: 'onebitflix_development',
-    username: 'onebitflix',
-    password: 'Piazin25$',
+    host: config.database.host,
+    port: String(config.database.port),
+    database: config.database.db_name,
+    username: config.database.username,
+    password: config.database.password,
+    dialectOptions:
+      config.node_env === 'production'
+        ? {
+            ssl: true,
+            native: true,
+          }
+        : undefined,
   },
 };

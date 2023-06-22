@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { config } from '../config';
 
-const secret = 'Hamu25$';
+const secret = config.jwt_secret as string;
 
 class JwtService {
   signToken(payload: string | Object | Buffer, expiration: string) {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "adminjs": "~5.5.1",
     "bcrypt": "~5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "~4.17.2",
     "express-formidable": "~1.2.0",
     "jsonwebtoken": "~8.5.1",
